@@ -37,7 +37,7 @@ const noop = () => {}
 function buildHTTPServer (routes, options = {onInit: noop}) {
   const {onInit} = options
   const app = express()
-  onInit()
+  onInit(app)
   app.use(cors())
   app.use(compression())
   app.use(bodyParser.json({limit: '50mb'}))
