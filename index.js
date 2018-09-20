@@ -32,8 +32,12 @@ const errorHandler = (err, req, res, next) => {
   res.json({error: {name, message}})
 }
 
-function buildHTTPServer (routes) {
+const noop = () => {}
+
+function buildHTTPServer (routes, options = {onInit: noop}) {
+  const {onInit} = options
   const app = express()
+  onInit()
   app.use(cors())
   app.use(compression())
   app.use(bodyParser.json({limit: '50mb'}))
